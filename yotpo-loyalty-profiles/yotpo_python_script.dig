@@ -4,12 +4,17 @@
 
 _export:
   td:
-    database: raw_us_mavi
+    database: [DATABASE_NAME]
+
++drop_table: 
+  td_ddl>:
+  empty_tables: ["yotpo_customers"]
+  database: [DATABASE_NAME]
 
 +ingest_yotpo_customers:
   py>: python.yotpo.main.main
   _env:
-    # Pass secrets as environment variables if needed
+    ## Pass secrets as environment variables if needed
     YOTPO_CLIENT_SECRET: ${secret:yotpo.client_secret}
     YOTPO_STORE_ID: ${secret:yotpo.store_id}
     TD_API_KEY: ${secret:td.apikey}
